@@ -18,17 +18,17 @@ import heroLab from "@/assets/hero-lab.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Grupo de Pesquisa Horizonte — UFCSPA" },
+      { title: "Lorem Ipsum" },
       {
         name: "description",
         content:
-          "Grupo de Pesquisa Horizonte: pesquisa aplicada em ciência de dados, saúde e inovação na Universidade Federal de Ciências da Saúde de Porto Alegre.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       },
-      { property: "og:title", content: "Grupo de Pesquisa Horizonte — UFCSPA" },
+      { property: "og:title", content: "Lorem Ipsum" },
       {
         property: "og:description",
         content:
-          "Pesquisa aplicada em ciência de dados, saúde e inovação na UFCSPA.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -38,97 +38,97 @@ export const Route = createFileRoute("/")({
 });
 
 const NAV = [
-  { id: "grupo", label: "O Grupo" },
-  { id: "equipe", label: "Equipe" },
-  { id: "linhas", label: "Linhas de Pesquisa" },
-  { id: "projetos", label: "Projetos" },
-  { id: "publicacoes", label: "Publicações" },
-  { id: "contato", label: "Contato" },
+  { id: "grupo", label: "Lorem" },
+  { id: "equipe", label: "Ipsum" },
+  { id: "linhas", label: "Dolor" },
+  { id: "projetos", label: "Sit" },
+  { id: "publicacoes", label: "Amet" },
+  { id: "contato", label: "Consectetur" },
 ];
 
 const TEAM = [
-  { name: "Dra. Helena Vasconcelos", role: "Coordenadora · Ciência de Dados", initials: "HV" },
-  { name: "Dr. Rafael Ximenes", role: "Vice-coordenador · Bioinformática", initials: "RX" },
-  { name: "Dra. Marina Coelho", role: "Pesquisadora · Saúde Pública", initials: "MC" },
-  { name: "Dr. Bruno Aguiar", role: "Pesquisador · IA Aplicada", initials: "BA" },
-  { name: "Luísa Menezes", role: "Doutoranda · Epidemiologia", initials: "LM" },
-  { name: "Thiago Rocha", role: "Mestrando · Aprendizado de Máquina", initials: "TR" },
+  { name: "Lorem Ipsum", role: "Lorem · Ipsum", initials: "LI" },
+  { name: "Dolor Sit", role: "Dolor · Sit", initials: "DS" },
+  { name: "Amet Consectetur", role: "Amet · Consectetur", initials: "AC" },
+  { name: "Adipiscing Elit", role: "Adipiscing · Elit", initials: "AE" },
+  { name: "Sed Eiusmod", role: "Sed · Eiusmod", initials: "SE" },
+  { name: "Tempor Incididunt", role: "Tempor · Incididunt", initials: "TI" },
 ];
 
 const LINHAS = [
   {
     icon: Brain,
-    title: "Inteligência Artificial em Saúde",
-    text: "Modelos preditivos para diagnóstico, triagem e apoio à decisão clínica.",
+    title: "Lorem Ipsum Dolor",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
   },
   {
     icon: Dna,
-    title: "Bioinformática Translacional",
-    text: "Análise de dados genômicos e integração multi-ômica em doenças complexas.",
+    title: "Sit Amet Consectetur",
+    text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.",
   },
   {
     icon: LineChart,
-    title: "Epidemiologia Computacional",
-    text: "Modelagem de determinantes sociais e vigilância em saúde populacional.",
+    title: "Adipiscing Elit",
+    text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.",
   },
   {
     icon: Cpu,
-    title: "Sistemas Digitais de Saúde",
-    text: "Arquiteturas interoperáveis, prontuários eletrônicos e telemedicina.",
+    title: "Sed Do Eiusmod",
+    text: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.",
   },
 ];
 
 const PROJETOS = [
   {
-    tag: "Em andamento",
-    title: "PredictCare",
-    text: "Plataforma de predição de risco cardiovascular a partir de prontuários eletrônicos.",
+    tag: "Lorem",
+    title: "Lorem Ipsum",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
-    tag: "Em andamento",
-    title: "GenoSUS",
-    text: "Integração de dados genômicos em coortes brasileiras do Sistema Único de Saúde.",
+    tag: "Ipsum",
+    title: "Dolor Sit Amet",
+    text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
   {
-    tag: "Concluído",
-    title: "VigiaRS",
-    text: "Painel de vigilância epidemiológica para arboviroses no Rio Grande do Sul.",
+    tag: "Dolor",
+    title: "Consectetur Adipiscing",
+    text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
   },
   {
-    tag: "Piloto",
-    title: "TeleTriagem",
-    text: "Assistente de triagem clínica baseado em LLMs para atenção primária.",
+    tag: "Sit",
+    title: "Elit Sed Do",
+    text: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
 ];
 
 const PUBS = [
   {
     year: "2025",
-    venue: "The Lancet Digital Health",
+    venue: "Lorem Ipsum Journal",
     title:
-      "Fairness-aware risk prediction for hospital readmission in Brazilian public hospitals",
-    authors: "Vasconcelos H., Ximenes R., Coelho M., et al.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+    authors: "Ipsum L., Dolor S., Amet C., et al.",
   },
   {
     year: "2024",
-    venue: "npj Digital Medicine",
+    venue: "Sit Amet Reviews",
     title:
-      "Federated learning for early sepsis detection across multi-center ICU cohorts",
-    authors: "Aguiar B., Vasconcelos H., Rocha T.",
+      "Consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore",
+    authors: "Elit S., Ipsum L., Dolor S.",
   },
   {
     year: "2024",
-    venue: "JAMIA",
+    venue: "Dolor Magazine",
     title:
-      "Interoperability patterns for the Brazilian Unified Health System: a scoping review",
-    authors: "Coelho M., Menezes L., Ximenes R.",
+      "Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi",
+    authors: "Amet C., Eiusmod T., Ipsum L.",
   },
   {
     year: "2023",
-    venue: "Bioinformatics",
+    venue: "Lorem Journal",
     title:
-      "Multi-omic integration reveals subtypes of treatment response in inflammatory disease",
-    authors: "Ximenes R., Vasconcelos H., et al.",
+      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum",
+    authors: "Dolor S., Ipsum L., et al.",
   },
 ];
 
@@ -154,14 +154,14 @@ function Header() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <a href="#top" className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <span className="font-display text-lg font-semibold">H</span>
+            <span className="font-display text-lg font-semibold">L</span>
           </div>
           <div className="leading-tight">
             <div className="font-display text-base font-semibold text-primary">
-              Horizonte
+              Lorem
             </div>
             <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-              Grupo de Pesquisa · UFCSPA
+              Ipsum Dolor · Sit Amet
             </div>
           </div>
         </a>
@@ -180,7 +180,7 @@ function Header() {
           href="#contato"
           className="hidden rounded-md border border-primary px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-primary-foreground md:inline-flex"
         >
-          Fale conosco
+          Lorem ipsum
         </a>
       </div>
     </header>
@@ -196,35 +196,34 @@ function Hero() {
         <div>
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/80">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            UFCSPA · CNPq
+            Lorem · Ipsum
           </div>
           <h1 className="font-display text-5xl leading-[1.05] tracking-tight md:text-6xl">
-            Ciência que atravessa <span className="text-accent">horizontes</span> da saúde.
+            Lorem ipsum dolor <span className="text-accent">sit amet</span> consectetur.
           </h1>
           <p className="mt-6 max-w-lg text-base leading-relaxed text-white/75 md:text-lg">
-            Somos um grupo de pesquisa dedicado a unir ciência de dados,
-            bioinformática e saúde pública para transformar evidências em
-            impacto clínico e social.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <a
               href="#linhas"
               className="inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-medium text-primary transition-transform hover:-translate-y-0.5"
             >
-              Conheça nossas linhas <ArrowRight className="h-4 w-4" />
+              Lorem ipsum dolor <ArrowRight className="h-4 w-4" />
             </a>
             <a
               href="#projetos"
               className="inline-flex items-center gap-2 rounded-md border border-white/25 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-white/10"
             >
-              Ver projetos
+              Sit amet
             </a>
           </div>
           <dl className="mt-14 grid max-w-md grid-cols-3 gap-6 border-t border-white/15 pt-8">
             {[
-              ["12", "Pesquisadores"],
-              ["30+", "Publicações"],
-              ["8", "Projetos ativos"],
+              ["00", "Lorem"],
+              ["00+", "Ipsum"],
+              ["0", "Dolor"],
             ].map(([n, l]) => (
               <div key={l}>
                 <dt className="font-display text-3xl text-accent">{n}</dt>
@@ -295,26 +294,26 @@ function Grupo() {
   return (
     <Section
       id="grupo"
-      eyebrow="O Grupo"
-      title="Uma comunidade científica interdisciplinar."
-      intro="O Grupo de Pesquisa Horizonte foi criado em 2018 dentro da UFCSPA para investigar como dados, algoritmos e evidências podem melhorar a saúde das pessoas. Reunimos pesquisadores, médicos, cientistas de dados e estudantes em torno de projetos que aproximam a universidade da sociedade."
+      eyebrow="Lorem"
+      title="Lorem ipsum dolor sit amet consectetur."
+      intro="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     >
       <div className="grid gap-6 md:grid-cols-3">
         {[
           {
             icon: Microscope,
-            title: "Pesquisa aplicada",
-            text: "Projetos com desfechos concretos em serviços de saúde e política pública.",
+            title: "Lorem Ipsum",
+            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
           },
           {
             icon: Users,
-            title: "Formação de pessoas",
-            text: "Iniciação científica, mestrado e doutorado com orientação próxima.",
+            title: "Dolor Sit Amet",
+            text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.",
           },
           {
             icon: BookOpen,
-            title: "Ciência aberta",
-            text: "Publicações, códigos e dados compartilhados sempre que possível.",
+            title: "Consectetur Adipiscing",
+            text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.",
           },
         ].map(({ icon: Icon, title, text }) => (
           <div
@@ -338,9 +337,9 @@ function Linhas() {
     <Section
       id="linhas"
       tint
-      eyebrow="Linhas de Pesquisa"
-      title="Quatro frentes de trabalho conectadas."
-      intro="Nossas linhas conversam entre si e sustentam projetos colaborativos com hospitais, secretarias de saúde e outras universidades."
+      eyebrow="Lorem Ipsum"
+      title="Dolor sit amet consectetur adipiscing."
+      intro="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     >
       <div className="grid gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-2">
         {LINHAS.map(({ icon: Icon, title, text }) => (
@@ -367,9 +366,9 @@ function Equipe() {
   return (
     <Section
       id="equipe"
-      eyebrow="Equipe"
-      title="Pessoas que fazem a pesquisa acontecer."
-      intro="Docentes, pesquisadores associados e pós-graduandos comprometidos com um ambiente colaborativo e rigoroso."
+      eyebrow="Ipsum"
+      title="Lorem ipsum dolor sit amet."
+      intro="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     >
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {TEAM.map((p) => (
@@ -396,9 +395,9 @@ function Projetos() {
     <Section
       id="projetos"
       tint
-      eyebrow="Projetos"
-      title="O que estamos construindo agora."
-      intro="Iniciativas em diferentes estágios de maturidade, do piloto à implementação em serviço."
+      eyebrow="Dolor Sit"
+      title="Amet consectetur adipiscing elit."
+      intro="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     >
       <div className="grid gap-6 md:grid-cols-2">
         {PROJETOS.map((p) => (
@@ -425,9 +424,9 @@ function Publicacoes() {
   return (
     <Section
       id="publicacoes"
-      eyebrow="Publicações"
-      title="Selecionadas em revistas de alto impacto."
-      intro="Uma amostra recente do que temos publicado. Acesse o Lattes de cada pesquisador para a lista completa."
+      eyebrow="Amet"
+      title="Consectetur adipiscing elit sed do."
+      intro="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     >
       <ul className="divide-y divide-border overflow-hidden rounded-lg border border-border bg-card">
         {PUBS.map((p) => (
@@ -464,27 +463,27 @@ function Contato() {
         <div>
           <div className="mb-3 flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-accent">
             <span className="h-px w-8 bg-accent" />
-            Contato
+            Consectetur
           </div>
           <h2 className="font-display text-4xl leading-tight md:text-5xl">
-            Vamos conversar sobre a sua próxima pesquisa.
+            Lorem ipsum dolor sit amet consectetur.
           </h2>
           <p className="mt-5 max-w-md text-white/75">
-            Parcerias acadêmicas, orientações, colaborações com serviços de
-            saúde e propostas de projeto são bem-vindas.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
           <ul className="mt-10 space-y-4 text-sm text-white/85">
             <li className="flex items-center gap-3">
               <Mail className="h-4 w-4 text-accent" />
-              horizonte@ufcspa.edu.br
+              lorem@ipsum.dolor
             </li>
             <li className="flex items-center gap-3">
               <Phone className="h-4 w-4 text-accent" />
-              +55 (51) 3303-8700
+              +00 (00) 0000-0000
             </li>
             <li className="flex items-center gap-3">
               <MapPin className="h-4 w-4 text-accent" />
-              R. Sarmento Leite, 245 · Porto Alegre / RS
+              Lorem Ipsum, 000 · Dolor / Sit
             </li>
           </ul>
         </div>
@@ -493,16 +492,16 @@ function Contato() {
           className="rounded-lg border border-white/15 bg-white/[0.03] p-8 backdrop-blur"
         >
           <div className="grid gap-5">
-            <Field label="Nome" placeholder="Seu nome completo" />
-            <Field label="E-mail" type="email" placeholder="voce@instituicao.br" />
-            <Field label="Instituição" placeholder="Universidade / Hospital" />
+            <Field label="Lorem" placeholder="Lorem ipsum" />
+            <Field label="Ipsum" type="email" placeholder="dolor@ipsum.dolor" />
+            <Field label="Dolor" placeholder="Sit / Amet" />
             <div>
               <label className="mb-2 block text-xs uppercase tracking-widest text-white/60">
-                Mensagem
+                Amet
               </label>
               <textarea
                 rows={4}
-                placeholder="Como podemos colaborar?"
+                placeholder="Lorem ipsum dolor sit amet?"
                 className="w-full rounded-md border border-white/20 bg-transparent px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-accent focus:outline-none"
               />
             </div>
@@ -510,7 +509,7 @@ function Contato() {
               type="submit"
               className="mt-2 inline-flex items-center justify-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition-transform hover:-translate-y-0.5"
             >
-              Enviar mensagem <ArrowRight className="h-4 w-4" />
+              Lorem ipsum <ArrowRight className="h-4 w-4" />
             </button>
           </div>
         </form>
@@ -540,10 +539,10 @@ function Footer() {
   return (
     <footer className="border-t border-border bg-background py-10">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 text-xs text-muted-foreground md:flex-row">
-        <div>© {new Date().getFullYear()} Grupo de Pesquisa Horizonte · UFCSPA</div>
+        <div>© {new Date().getFullYear()} Lorem Ipsum · Dolor Sit</div>
         <div className="flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-          Universidade Federal de Ciências da Saúde de Porto Alegre
+          Amet Consectetur Adipiscing Elit
         </div>
       </div>
     </footer>
