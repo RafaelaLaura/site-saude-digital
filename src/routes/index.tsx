@@ -1,6 +1,9 @@
+import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { app, analytics } from "@/lib/firebase";
 import {
   ArrowRight,
+  ExternalLink,
   Mail,
   MapPin,
   Phone,
@@ -8,23 +11,27 @@ import {
   Microscope,
   Users,
   FileText,
-  Brain,
-  Cpu,
-  Dna,
-  LineChart,
 } from "lucide-react";
 import heroLab from "@/assets/hero-lab.jpg";
+import ufcspaImage from "@/assets/ufcspa.jpg";
+import logoSaudeDigital from "@/assets/logo_saude_digital.png";
+import { LINHAS, MEMBERS, TEAM } from "@/data/site-data";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Grupo de Pesquisa Horizonte — UFCSPA" },
-      {
-        name: "description",
-        content:
-          "Grupo de Pesquisa Horizonte: pesquisa aplicada em ciência de dados, saúde e inovação na Universidade Federal de Ciências da Saúde de Porto Alegre.",
-      },
-      { property: "og:title", content: "Grupo de Pesquisa Horizonte — UFCSPA" },
+      { title: "Grupo de Pesquisa Saúde Digital — UFCSPA" },
+  
+      { property: "og:title", content: "Grupo de Pesquisa Saúde Digital — UFCSPA" },
       {
         property: "og:description",
         content:
@@ -44,38 +51,6 @@ const NAV = [
   { id: "projetos", label: "Projetos" },
   { id: "publicacoes", label: "Publicações" },
   { id: "contato", label: "Contato" },
-];
-
-const TEAM = [
-  { name: "Dra. Helena Vasconcelos", role: "Coordenadora · Ciência de Dados", initials: "HV" },
-  { name: "Dr. Rafael Ximenes", role: "Vice-coordenador · Bioinformática", initials: "RX" },
-  { name: "Dra. Marina Coelho", role: "Pesquisadora · Saúde Pública", initials: "MC" },
-  { name: "Dr. Bruno Aguiar", role: "Pesquisador · IA Aplicada", initials: "BA" },
-  { name: "Luísa Menezes", role: "Doutoranda · Epidemiologia", initials: "LM" },
-  { name: "Thiago Rocha", role: "Mestrando · Aprendizado de Máquina", initials: "TR" },
-];
-
-const LINHAS = [
-  {
-    icon: Brain,
-    title: "Inteligência Artificial em Saúde",
-    text: "Modelos preditivos para diagnóstico, triagem e apoio à decisão clínica.",
-  },
-  {
-    icon: Dna,
-    title: "Bioinformática Translacional",
-    text: "Análise de dados genômicos e integração multi-ômica em doenças complexas.",
-  },
-  {
-    icon: LineChart,
-    title: "Epidemiologia Computacional",
-    text: "Modelagem de determinantes sociais e vigilância em saúde populacional.",
-  },
-  {
-    icon: Cpu,
-    title: "Sistemas Digitais de Saúde",
-    text: "Arquiteturas interoperáveis, prontuários eletrônicos e telemedicina.",
-  },
 ];
 
 const PROJETOS = [
@@ -152,18 +127,12 @@ function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <a href="#top" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <span className="font-display text-lg font-semibold">H</span>
-          </div>
-          <div className="leading-tight">
-            <div className="font-display text-base font-semibold text-primary">
-              Horizonte
-            </div>
-            <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-              Grupo de Pesquisa · UFCSPA
-            </div>
-          </div>
+        <a href="#top" className="flex items-center gap-3">
+          <img
+            src={logoSaudeDigital}
+            alt="Logo Saúde Digital"
+            className="h-10 w-auto"
+          />
         </a>
         <nav className="hidden items-center gap-7 md:flex">
           {NAV.map((n) => (
@@ -238,7 +207,7 @@ function Hero() {
         <div className="relative">
           <div className="absolute inset-0 -translate-x-4 translate-y-4 rounded-lg border border-accent/50" />
           <img
-            src={heroLab}
+            src={ufcspaImage}
             alt="Laboratório de pesquisa"
             width={1600}
             height={1200}
@@ -297,7 +266,7 @@ function Grupo() {
       id="grupo"
       eyebrow="O Grupo"
       title="Uma comunidade científica interdisciplinar."
-      intro="O Grupo de Pesquisa Horizonte foi criado em 2018 dentro da UFCSPA para investigar como dados, algoritmos e evidências podem melhorar a saúde das pessoas. Reunimos pesquisadores, médicos, cientistas de dados e estudantes em torno de projetos que aproximam a universidade da sociedade."
+      intro="O Grupo de Pesquisa Saúde digital foi criado em 2026 na Universidade Federal de Ciências da Saúde de Porto Alegre (UFCSPA) para investigar como dados, algoritmos e evidências podem melhorar a saúde das pessoas. Reunimos pesquisadores, médicos, cientistas de dados e estudantes em torno de projetos que aproximam a universidade da sociedade."
     >
       <div className="grid gap-6 md:grid-cols-3">
         {[
@@ -334,30 +303,133 @@ function Grupo() {
 }
 
 function Linhas() {
+  const [openLineModal, setOpenLineModal] = React.useState(false);
+  const [selectedLineIndex, setSelectedLineIndex] = React.useState<number | null>(null);
+  const selectedLine = selectedLineIndex !== null ? LINHAS[selectedLineIndex] : null;
+
   return (
     <Section
       id="linhas"
       tint
       eyebrow="Linhas de Pesquisa"
-      title="Quatro frentes de trabalho conectadas."
-      intro="Nossas linhas conversam entre si e sustentam projetos colaborativos com hospitais, secretarias de saúde e outras universidades."
+      title="Linhas de pesquisa"
+      intro="Conheça as áreas de trabalho, contagem de estudantes e pesquisadores, e visualize os participantes de cada linha."
     >
-      <div className="grid gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-2">
-        {LINHAS.map(({ icon: Icon, title, text }) => (
-          <div key={title} className="bg-card p-8 md:p-10">
-            <div className="flex items-start gap-5">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                <Icon className="h-5 w-5" />
+      <div className="overflow-hidden rounded-lg border border-border bg-card">
+        <div className="overflow-x-auto">
+          <table className="min-w-full border-collapse text-left">
+            <thead className="bg-secondary/40">
+              <tr>
+                <th className="px-4 py-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                  Nome da linha de pesquisa
+                </th>
+                <th className="px-4 py-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                  Quantidade de Estudantes
+                </th>
+                <th className="px-4 py-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                  Quantidade de Pesquisadores
+                </th>
+                <th className="px-4 py-3 text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                  Ações
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {LINHAS.map((line, index) => (
+                <tr key={line.name} className="border-t border-border bg-background">
+                  <td className="px-4 py-4 text-sm text-foreground">{line.name}</td>
+                  <td className="px-4 py-4 text-sm text-muted-foreground">{line.students}</td>
+                  <td className="px-4 py-4 text-sm text-muted-foreground">{line.researchers}</td>
+                  <td className="px-4 py-4 text-sm">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedLineIndex(index);
+                        setOpenLineModal(true);
+                      }}
+                      className="inline-flex rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                    >
+                      Visualizar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <Dialog open={openLineModal} onOpenChange={setOpenLineModal}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{selectedLine?.name ?? "Participantes da linha"}</DialogTitle>
+            </DialogHeader>
+
+            {selectedLine && (
+              <div className="mt-6 space-y-6">
+                <div>
+                  <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">
+                    Objetivo
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-foreground text-justify">
+                    {selectedLine.objective}
+                  </p>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-lg border border-border bg-secondary/40 p-4">
+                    <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                      Estudantes
+                    </p>
+                    <p className="mt-3 text-3xl font-semibold text-primary">
+                      {selectedLine.students}
+                    </p>
+                  </div>
+                  <div className="rounded-lg border border-border bg-secondary/40 p-4">
+                    <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                      Pesquisadores
+                    </p>
+                    <p className="mt-3 text-3xl font-semibold text-primary">
+                      {selectedLine.researchers}
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-sm text-muted-foreground">Participantes</p>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                    {selectedLine.participants.map((memberIndex) => {
+                      const participant = MEMBERS[memberIndex];
+                      return (
+                        <div
+                          key={participant.name}
+                          className="flex items-center justify-between rounded-lg border border-border bg-background px-4 py-3 text-sm"
+                        >
+                          <span>{participant.name}</span>
+                          {participant.lattesUrl ? (
+                            <a
+                              href={participant.lattesUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="ml-4 inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-secondary text-muted-foreground transition-colors hover:bg-secondary/80"
+                            >
+                              <ExternalLink className="h-4 w-4" />
+                            </a>
+                          ) : null}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
-              <div>
-                <h3 className="font-display text-xl text-primary">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {text}
-                </p>
-              </div>
-            </div>
-          </div>
-        ))}
+            )}
+
+            <DialogFooter className="mt-6">
+              <DialogClose className="inline-flex rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
+                Fechar
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </Section>
   );
@@ -476,7 +548,7 @@ function Contato() {
           <ul className="mt-10 space-y-4 text-sm text-white/85">
             <li className="flex items-center gap-3">
               <Mail className="h-4 w-4 text-accent" />
-              horizonte@ufcspa.edu.br
+              saude.digital@ufcspa.edu.br
             </li>
             <li className="flex items-center gap-3">
               <Phone className="h-4 w-4 text-accent" />
@@ -540,7 +612,7 @@ function Footer() {
   return (
     <footer className="border-t border-border bg-background py-10">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 text-xs text-muted-foreground md:flex-row">
-        <div>© {new Date().getFullYear()} Grupo de Pesquisa Horizonte · UFCSPA</div>
+        <div>© {new Date().getFullYear()} Grupo de Pesquisa Saúde Digital · UFCSPA</div>
         <div className="flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-accent" />
           Universidade Federal de Ciências da Saúde de Porto Alegre
