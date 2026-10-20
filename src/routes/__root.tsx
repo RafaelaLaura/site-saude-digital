@@ -77,11 +77,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Grupo de Pesquisa Horizonte — UFCSPA" },
-      { name: "description", content: "Grupo de pesquisa da UFCSPA em ciência de dados, bioinformática e saúde." },
+      { title: "Grupo de Pesquisa Saúde Digital — UFCSPA" },
+      {
+        name: "description",
+        content: "Grupo de pesquisa da UFCSPA em ciência de dados, bioinformática e saúde.",
+      },
       { name: "author", content: "UFCSPA" },
-      { property: "og:title", content: "Grupo de Pesquisa Horizonte — UFCSPA" },
-      { property: "og:description", content: "Grupo de pesquisa da UFCSPA em ciência de dados, bioinformática e saúde." },
+      { property: "og:title", content: "Grupo de Pesquisa Saúde Digital — UFCSPA" },
+      {
+        property: "og:description",
+        content: "Grupo de pesquisa da UFCSPA em ciência de dados, bioinformática e saúde.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -108,7 +114,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>
