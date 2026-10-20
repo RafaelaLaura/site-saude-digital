@@ -1,0 +1,389 @@
+openapi: 3.0.3
+info:
+  title: API do Grupo de Pesquisa Saúde Digital
+  version: 1.0.0
+  description: |
+    Contrato da API usada pelo site do grupo (UFCSPA).
+
+    - Todas as rotas começam com `/v1`. Mudanças que quebram o contrato vão para `/v2`.
+    - Toda lista usa o mesmo formato paginado: `{ items, page, pageSize, total }`.
+    - Este arquivo é a fonte da verdade: os services em `src/services/` seguem estas rotas.
+servers:
+  - url: https://api.example.com
+    description: Produção (endereço a definir)
+  - url: http://localhost:3000
+    description: Desenvolvimento local
+
+# API pública, sem autenticação nesta fase. Edição de conteúdo (painel admin) virá depois.
+security: []
+
+tags:
+  - name: Research lines
+    description: Linhas de pesquisa e seus participantes
+  - name: Projects
+    description: Projetos do grupo
+  - name: Publications
+    description: Produção científica
+  - name: Members
+    description: Pesquisadores e estudantes
+  - name: Contact
+    description: Mensagens enviadas pelo formulário do site
+
+paths:
+  /v1/research-lines:
+    get:
+      tags: [Research lines]
+      summary: Lista as linhas de pesquisa
+      operationId: listResearchLines
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/Query"
+      responses:
+        "200":
+          description: Página de linhas de pesquisa
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedResearchLines"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
+  /v1/research-lines/{researchLineId}/members:
+    get:
+      tags: [Research lines]
+      summary: Lista os participantes de uma linha de pesquisa
+      operationId: listResearchLineMembers
+      parameters:
+        - name: researchLineId
+          in: path
+          required: true
+          description: Identificador da linha (ex. `ciberseguranca-em-saude`)
+          schema:
+            type: string
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: Página de participantes
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedMembers"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /v1/members:
+    get:
+      tags: [Members]
+      summary: Lista todos os membros do grupo
+      operationId: listMembers
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: Página de membros
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedMembers"
+
+  /v1/projects:
+    get:
+      tags: [Projects]
+      summary: Lista os projetos
+      operationId: listProjects
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/Query"
+        - name: status
+          in: query
+          description: Filtra pela situação do projeto
+          schema:
+            $ref: "#/components/schemas/ProjectStatus"
+      responses:
+        "200":
+          description: Página de projetos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedProjects"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
+  /v1/publications:
+    get:
+      tags: [Publications]
+      summary: Lista as publicações, da mais recente para a mais antiga
+      operationId: listPublications
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+        - name: query
+          in: query
+          description: Busca por título, autor ou revista (ignora acentos e maiúsculas)
+          schema:
+            type: string
+        - name: year
+          in: query
+          description: Filtra por ano de publicação
+          schema:
+            type: integer
+            example: 2024
+      responses:
+        "200":
+          description: Página de publicações
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedPublications"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
+  /v1/publications/years:
+    get:
+      tags: [Publications]
+      summary: Anos que possuem publicação (alimenta o filtro de ano)
+      operationId: listPublicationYears
+      responses:
+        "200":
+          description: Anos, do mais recente ao mais antigo
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                example: [2025, 2024, 2023]
+
+  /v1/contact-messages:
+    post:
+      tags: [Contact]
+      summary: Envia uma mensagem pelo formulário de contato
+      operationId: sendContactMessage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactMessage"
+      responses:
+        "201":
+          description: Mensagem recebida
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [received]
+                properties:
+                  received:
+                    type: boolean
+                    example: true
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
+components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: Número da página, começando em 1
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PageSize:
+      name: pageSize
+      in: query
+      description: Quantidade de itens por página
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 10
+    Query:
+      name: query
+      in: query
+      description: Busca por texto (ignora acentos e maiúsculas)
+      schema:
+        type: string
+
+  responses:
+    BadRequest:
+      description: Parâmetros inválidos
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    NotFound:
+      description: Recurso não encontrado
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+  schemas:
+    Error:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: string
+          example: Rota não encontrada
+
+    Pagination:
+      type: object
+      required: [page, pageSize, total]
+      properties:
+        page:
+          type: integer
+          example: 1
+        pageSize:
+          type: integer
+          example: 10
+        total:
+          type: integer
+          description: Total de itens que atendem aos filtros (somando todas as páginas)
+          example: 48
+
+    ResearchLine:
+      type: object
+      required: [id, name, studentCount, researcherCount, objective]
+      properties:
+        id:
+          type: string
+          example: ciberseguranca-em-saude
+        name:
+          type: string
+          example: Cibersegurança em Saúde
+        studentCount:
+          type: integer
+          example: 0
+        researcherCount:
+          type: integer
+          example: 1
+        objective:
+          type: string
+
+    Member:
+      type: object
+      required: [id, name]
+      properties:
+        id:
+          type: string
+          example: muriel-figueredo-franco
+        name:
+          type: string
+          example: Prof. Dr. Muriel Figueredo Franco
+        lattesUrl:
+          type: string
+          format: uri
+          example: http://lattes.cnpq.br/5417317635081894
+
+    ProjectStatus:
+      type: string
+      enum: [ongoing, completed, pilot]
+      description: "`ongoing` = em andamento, `completed` = concluído, `pilot` = piloto"
+
+    Project:
+      type: object
+      required: [id, title, status, description]
+      properties:
+        id:
+          type: string
+          example: predictcare
+        title:
+          type: string
+          example: PredictCare
+        status:
+          $ref: "#/components/schemas/ProjectStatus"
+        description:
+          type: string
+
+    Publication:
+      type: object
+      required: [id, year, venue, title, authors]
+      properties:
+        id:
+          type: string
+          example: rcvar-cyberattack-costs
+        year:
+          type: integer
+          example: 2024
+        venue:
+          type: string
+          description: Revista, conferência ou repositório
+          example: Computers & Security
+        title:
+          type: string
+        authors:
+          type: string
+          example: Franco M. F., Künzler F., von der Assen J., Feng C., Stiller B.
+        abstract:
+          type: string
+          description: Resumo exibido na prévia
+        url:
+          type: string
+          format: uri
+          description: Link do artigo (DOI ou página da revista)
+          example: https://doi.org/10.1016/j.cose.2024.103737
+
+    ContactMessage:
+      type: object
+      required: [name, email, message]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        organization:
+          type: string
+        message:
+          type: string
+
+    PaginatedResearchLines:
+      allOf:
+        - $ref: "#/components/schemas/Pagination"
+        - type: object
+          required: [items]
+          properties:
+            items:
+              type: array
+              items:
+                $ref: "#/components/schemas/ResearchLine"
+
+    PaginatedMembers:
+      allOf:
+        - $ref: "#/components/schemas/Pagination"
+        - type: object
+          required: [items]
+          properties:
+            items:
+              type: array
+              items:
+                $ref: "#/components/schemas/Member"
+
+    PaginatedProjects:
+      allOf:
+        - $ref: "#/components/schemas/Pagination"
+        - type: object
+          required: [items]
+          properties:
+            items:
+              type: array
+              items:
+                $ref: "#/components/schemas/Project"
+
+    PaginatedPublications:
+      allOf:
+        - $ref: "#/components/schemas/Pagination"
+        - type: object
+          required: [items]
+          properties:
+            items:
+              type: array
+              items:
+                $ref: "#/components/schemas/Publication"
