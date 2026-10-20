@@ -1,0 +1,26 @@
+@utility layout-container {
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1rem;
+  @media (min-width: 40rem) {
+    padding-inline: 1.5rem;
+  }
+}
+
+@utility layout-section {
+  scroll-margin-top: 4rem;
+  padding-block: 4rem;
+  @media (min-width: 48rem) {
+    padding-block: 6rem;
+  }
+}
+
+@utility touch-target {
+  min-height: 2.75rem;
+}
+
+/*
+ * Variante `roomy:` para telas largas E altas. Em celulares e telas baixas (ex.: celular
+ * deitado) o modal inteiro rola; só nas telas "roomy" a rolagem fica restrita a uma lista.
+ */
+@custom-variant roomy (@media (min-width: 40rem) and (min-height: 46rem));

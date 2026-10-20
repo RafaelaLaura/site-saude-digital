@@ -1,0 +1,86 @@
+/*
+ * TIPOGRAFIA
+ * Famílias e estilos de texto padronizados. Nos componentes, use SEMPRE estas classes
+ * em vez de tamanhos soltos (text-sm, text-4xl...):
+ *
+ *   text-display     título principal da página (hero)
+ *   text-heading-1   título de seção
+ *   text-heading-2   título de destaque em cartão grande
+ *   text-heading-3   título de cartão / item
+ *   text-body-lg     texto de introdução
+ *   text-body        texto corrido
+ *   text-body-sm     texto secundário
+ *   text-label       rótulos, botões, metadados (medium)
+ *   text-caption     legendas e notas (nunca menor que isto)
+ */
+
+@theme {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@utility text-display {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  @media (min-width: 40rem) {
+    font-size: 3rem;
+  }
+  @media (min-width: 48rem) {
+    font-size: 3.75rem;
+  }
+}
+
+@utility text-heading-1 {
+  font-family: var(--font-display);
+  font-size: 1.875rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  @media (min-width: 40rem) {
+    font-size: 2.25rem;
+  }
+  @media (min-width: 48rem) {
+    font-size: 3rem;
+  }
+}
+
+@utility text-heading-2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+@utility text-heading-3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+@utility text-body-lg {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+@utility text-body {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@utility text-body-sm {
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+@utility text-label {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+@utility text-caption {
+  font-size: 0.75rem;
+  line-height: 1.4;
+}

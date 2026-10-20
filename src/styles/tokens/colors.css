@@ -1,0 +1,62 @@
+/*
+ * CORES
+ * 1) Paleta da marca (valores brutos, não use direto nos componentes).
+ * 2) Tokens semânticos (use estes: bg-primary, text-muted-foreground, border-border...).
+ * Para mudar uma cor do site, altere só aqui.
+ */
+
+:root {
+  /* Paleta da marca UFCSPA / Saúde Digital */
+  --palette-navy: #001947;
+  --palette-gold: #b39543;
+  --palette-white: #ffffff;
+  --palette-sand-50: #f4f2ec;
+  --palette-sand-100: #ebe8df;
+  --palette-sand-200: #e9e6dd;
+  --palette-sand-300: #d9d4c6;
+  --palette-slate-600: #4a5570;
+  --palette-red-600: oklch(0.577 0.245 27.325);
+
+  /* Tokens semânticos */
+  --background: var(--palette-sand-50);
+  --foreground: var(--palette-navy);
+  --card: var(--palette-white);
+  --card-foreground: var(--palette-navy);
+  --popover: var(--palette-white);
+  --popover-foreground: var(--palette-navy);
+  --primary: var(--palette-navy);
+  --primary-foreground: var(--palette-white);
+  --secondary: var(--palette-sand-200);
+  --secondary-foreground: var(--palette-navy);
+  --muted: var(--palette-sand-100);
+  --muted-foreground: var(--palette-slate-600);
+  --accent: var(--palette-gold);
+  --accent-foreground: var(--palette-white);
+  --destructive: var(--palette-red-600);
+  --destructive-foreground: var(--palette-white);
+  --border: var(--palette-sand-300);
+  --input: var(--palette-sand-300);
+  --ring: var(--palette-gold);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
