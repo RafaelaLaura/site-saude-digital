@@ -2,6 +2,7 @@ import { Badge, Card, FilterChips, Heading, Text } from "@/components/design-sys
 import { ListFeedback } from "@/components/shared/ListFeedback";
 import { LoadMoreButton } from "@/components/shared/LoadMoreButton";
 import { PageSection } from "@/components/shared/PageSection";
+import { EducationalGamesCard } from "./EducationalGamesCard";
 import { PROJECT_STATUSES, PROJECT_STATUS_LABELS } from "./project-status";
 import { useProjects } from "./useProjects";
 
@@ -56,6 +57,8 @@ export function ProjectsSection() {
           label="Ver mais projetos"
         />
       </ListFeedback>
+
+      <EducationalGamesCard />
     </PageSection>
   );
 }

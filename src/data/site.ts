@@ -11,6 +11,13 @@ export const CONTACT = {
   instagramUrl: "https://www.instagram.com/saudedigitalufcspa/",
 } as const;
 
+export const EDUCATIONAL_GAMES = {
+  title: "Saúde Planetária",
+  description:
+    "Jogos educativos para aprender sobre saúde, ambiente e prevenção de doenças. Comece pelo jogo da dengue: conheça o ciclo de transmissão, encontre os criadouros do Aedes aegypti e ajude a conter um surto na cidade.",
+  url: "https://nicolassbellina.github.io/JogosLaboratorioSaudeDigital/",
+} as const;
+
 export const HERO_STATS = [
   { value: "12", label: "Pesquisadores" },
   { value: "30+", label: "Publicações" },

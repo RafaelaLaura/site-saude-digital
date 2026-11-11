@@ -1,5 +1,5 @@
-import { ArrowUp, Instagram } from "lucide-react";
-import { CONTACT, GROUP_NAME, UNIVERSITY_NAME } from "@/data/site";
+import { ArrowUp, Gamepad2, Instagram } from "lucide-react";
+import { CONTACT, EDUCATIONAL_GAMES, GROUP_NAME, UNIVERSITY_NAME } from "@/data/site";
 import { Navigation } from "./Navigation";
 
 export function SiteFooter() {
@@ -21,6 +21,15 @@ export function SiteFooter() {
             className="touch-target inline-flex items-center gap-1 hover:text-primary hover:underline"
           >
             <Instagram aria-hidden className="size-4" /> Instagram
+            <span className="sr-only">(abre em nova aba)</span>
+          </a>
+          <a
+            href={EDUCATIONAL_GAMES.url}
+            target="_blank"
+            rel="noreferrer"
+            className="touch-target inline-flex items-center gap-1 hover:text-primary hover:underline"
+          >
+            <Gamepad2 aria-hidden className="size-4" /> Jogos educativos
             <span className="sr-only">(abre em nova aba)</span>
           </a>
           <a
