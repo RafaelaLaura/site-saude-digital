@@ -6,10 +6,18 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+// Build estático para o GitHub Pages: só com PAGES_BASE_PATH definida, para não mudar o build do Lovable.
+const pagesBasePath = process.env.PAGES_BASE_PATH;
+
 export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    ...(pagesBasePath && { prerender: { enabled: true, crawlLinks: true } }),
   },
+  ...(pagesBasePath && {
+    nitro: false,
+    vite: { base: pagesBasePath },
+  }),
 });
